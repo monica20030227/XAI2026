@@ -1,0 +1,8 @@
+streamlit>=1.32
+pandas>=2.0
+av
+deepface
+streamlit-autorefresh
+streamlit-webrtc
+opencv-python
+tf-keras
