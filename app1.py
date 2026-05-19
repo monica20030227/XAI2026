@@ -17,6 +17,9 @@ try:
 except Exception:
     cv2 = None
 
+import os
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
+
 try:
     from deepface import DeepFace
     DEEPFACE_IMPORT_ERROR = ""
