@@ -19,8 +19,10 @@ except Exception:
 
 try:
     from deepface import DeepFace
-except Exception:
+    DEEPFACE_IMPORT_ERROR = ""
+except Exception as e:
     DeepFace = None
+    DEEPFACE_IMPORT_ERROR = repr(e)
 
 try:
     from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoProcessorBase
