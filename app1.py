@@ -526,21 +526,23 @@ def render_task_video_emotion_monitor():
             st.rerun()
 
     st.markdown("#### webcam 拍攝框")
-    webrtc_ctx = webrtc_streamer(
-        key=f"task_emotion_webrtc_{st.session_state.get('week')}",
-        mode=WebRtcMode.SENDONLY,
-        rtc_configuration={
-            "iceServers": [
-                {"urls": ["stun:stun.l.google.com:19302"]}
-            ]
-        },
-        media_stream_constraints={
-            "video": True,
-            "audio": False,
-        },
-        video_processor_factory=EmotionVideoProcessor,
-        async_processing=True,
-    )
+    webrtc_ctx = None
+    if webrtc_streamer is not None and WebRtcMode is not None and av is not None:
+        webrtc_ctx = webrtc_streamer(
+            key=f"task_emotion_webrtc_{st.session_state.get('week')}",
+            mode=WebRtcMode.SENDONLY,
+            rtc_configuration={
+                "iceServers": [
+                    {"urls": ["stun:stun.l.google.com:19302"]}
+                ]
+            },
+            media_stream_constraints={
+                "video": True,
+                "audio": False,
+            },
+            video_processor_factory=EmotionVideoProcessor,
+            async_processing=True,
+        )
     else:
         st.warning("目前環境未安裝 streamlit-webrtc / av，無法直接使用瀏覽器內建 webcam。可改用下方影片上傳。")
 
