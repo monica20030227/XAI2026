@@ -1,9 +1,9 @@
-streamlit>=1.32
-pandas>=2.0
-requests
-numpy<2
-av
-streamlit-webrtc
-opencv-python-headless
-deepface
+streamlit==1.39.0
+pandas==2.2.2
+requests==2.32.3
+numpy==1.26.4
+av==12.3.0
+streamlit-webrtc==0.47.9
+opencv-python-headless==4.10.0.84
 tensorflow==2.16.1
+deepface==0.0.93
