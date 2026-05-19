@@ -480,7 +480,7 @@ def render_emotion_detection_live_panel(webrtc_ctx):
             st.error("目前環境缺少 DeepFace，無法開始情緒偵測。")
         elif webrtc_ctx is None:
             st.error("webcam 模組不可用。請確認已安裝 streamlit-webrtc 與 av。")
-        elif not webrtc_ctx.state.playing:
+        elif not getattr(webrtc_ctx.state, "playing", False):
             st.info("請先允許瀏覽器使用內建相機，啟動 webcam 後才會開始記錄。")
         else:
             processor = getattr(webrtc_ctx, "video_processor", None)
@@ -526,16 +526,21 @@ def render_task_video_emotion_monitor():
             st.rerun()
 
     st.markdown("#### webcam 拍攝框")
-    webrtc_ctx = None
-    if webrtc_streamer is not None and WebRtcMode is not None and av is not None:
-        webrtc_ctx = webrtc_streamer(
-            key=f"task_emotion_webrtc_{st.session_state.get('week')}",
-            mode=WebRtcMode.SENDRECV,
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-            media_stream_constraints={"video": True, "audio": False},
-            video_processor_factory=EmotionVideoProcessor,
-            async_processing=True,
-        )
+    webrtc_ctx = webrtc_streamer(
+        key=f"task_emotion_webrtc_{st.session_state.get('week')}",
+        mode=WebRtcMode.SENDONLY,
+        rtc_configuration={
+            "iceServers": [
+                {"urls": ["stun:stun.l.google.com:19302"]}
+            ]
+        },
+        media_stream_constraints={
+            "video": True,
+            "audio": False,
+        },
+        video_processor_factory=EmotionVideoProcessor,
+        async_processing=True,
+    )
     else:
         st.warning("目前環境未安裝 streamlit-webrtc / av，無法直接使用瀏覽器內建 webcam。可改用下方影片上傳。")
 
