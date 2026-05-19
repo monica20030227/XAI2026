@@ -1,8 +1,9 @@
 streamlit>=1.32
 pandas>=2.0
+requests
+numpy<2
 av
-deepface
-streamlit-autorefresh
 streamlit-webrtc
-opencv-python
-tf-keras
+opencv-python-headless
+deepface
+tensorflow==2.16.1
