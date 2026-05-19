@@ -472,7 +472,7 @@ def get_recent_emotion_records(limit: int = 20) -> pd.DataFrame:
         df = df[df["session_id"].astype(str) == sid]
     return df.tail(limit)
 
-@st.fragment(run_every="3s")
+#@st.fragment(run_every="3s")
 def render_emotion_detection_live_panel(webrtc_ctx):
     info_cols = st.columns(4)
     info_cols[0].metric("raw_emotion", st.session_state.get("latest_raw_emotion", "-") or "-")
@@ -534,7 +534,7 @@ def render_task_video_emotion_monitor():
     webrtc_ctx = None
     if webrtc_streamer is not None and WebRtcMode is not None and av is not None:
         webrtc_ctx = webrtc_streamer(
-            key=f"task_emotion_webrtc_{st.session_state.get('week')}",
+            key="task_emotion_webrtc",
             mode=WebRtcMode.SENDRECV,
             rtc_configuration={
                 "iceServers": [
