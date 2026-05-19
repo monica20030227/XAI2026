@@ -2,6 +2,7 @@ streamlit==1.39.0
 pandas==2.2.2
 requests==2.32.3
 numpy==1.26.4
+rich==13.9.4
 av==11.0.0
 aiortc==1.9.0
 streamlit-webrtc==0.47.9
