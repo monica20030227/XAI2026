@@ -482,7 +482,7 @@ def render_emotion_detection_live_panel(webrtc_ctx):
 
     if st.session_state.get("emotion_detecting", False):
         if DeepFace is None:
-            st.error("目前環境缺少 DeepFace，無法開始情緒偵測。")
+            st.error(f"目前環境缺少 DeepFace，無法開始情緒偵測。錯誤原因：{DEEPFACE_IMPORT_ERROR}")
         elif webrtc_ctx is None:
             st.error("webcam 模組不可用。請確認已安裝 streamlit-webrtc 與 av。")
         elif not getattr(webrtc_ctx.state, "playing", False):
