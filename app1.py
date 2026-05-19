@@ -535,7 +535,7 @@ def render_task_video_emotion_monitor():
     if webrtc_streamer is not None and WebRtcMode is not None and av is not None:
         webrtc_ctx = webrtc_streamer(
             key=f"task_emotion_webrtc_{st.session_state.get('week')}",
-            mode=WebRtcMode.SENDONLY,
+            mode=WebRtcMode.SENDRECV,
             rtc_configuration={
                 "iceServers": [
                     {"urls": ["stun:stun.l.google.com:19302"]}
